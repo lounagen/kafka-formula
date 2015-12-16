@@ -1,0 +1,10 @@
+[Unit]
+Description=kafka broker
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/lib/kafka/bin/kafka-server-start.sh /usr/local/lib/kafka/config/server.properties
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,67 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+kafka:
+  pkg: kafka
+  config: '/usr/local/lib/kafka/config/server.properties'
+  service:
+    name: kafka
+  version:
+    kafka: 0.9.0.0
+    scala: 2.11
+  tarball:
+    tgz:
+      source: http://apache.mirrors.ovh.net/ftp.apache.org/dist/kafka/0.9.0.0/kafka_2.11-0.9.0.0.tgz
+      source_hash: md5=084fb80cdc8c72dc75bc3519a5d2cc5c
+  conf:
+    broker:
+      id: 0
+    listeners: 'PLAINTEXT://:9092'
+    port: 9092
+    host:
+      name: localhost
+    advertised:
+      host:
+        name: ''
+      port: ''
+    socket:
+      send:
+        buffer:
+          bytes: 102400
+      receive:
+        buffer:
+          bytes: 102400
+      request:
+        max:
+          bytes: 104857600
+    num:
+      network:
+        threads: 3
+      io:
+        threads: 8
+      partitions: 1
+      recovery:
+        threads:
+          per:
+            data:
+              dir: 1
+    log:
+      dirs: /tmp/kafka-logs
+      flush:
+        interval:
+          messages: 10000
+          ms: 1000
+      retention:
+        hours: 168
+        bytes: 1073741824
+        check:
+          interval:
+            ms: 300000
+      segment:
+        bytes: 1073741824
+      cleaner:
+        enable: 'false'
+    zookeeper:
+      connect: 'localhost:2181'
+      connection:
+        timeout:
+          ms: 6000
