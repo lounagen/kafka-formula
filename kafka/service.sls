@@ -7,3 +7,9 @@ kafka-name:
   service.running:
     - name: {{ kafka.service.name }}
     - enable: True
+    - watch:
+      - archive: kafka-tarball
+      - file: kafka-systemd
+      - file: kafka-systemv
+      - file: kafka-upstart
+

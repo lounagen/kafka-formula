@@ -46,6 +46,15 @@ kafka-systemd:
     - group: root
 # todo: run "systemctl daemon-reload" after modifying the systemd files
                   
+kafka-systemv:
+  file.managed:
+    - name: /etc/init.d/kafka
+    - source: salt://kafka/files/systemv/kafka
+    - template: jinja
+    - mode: 755
+    - user: root
+    - group: root
+
 kafka-upstart:
   file.managed:
     - name: /etc/init/kafka.conf
