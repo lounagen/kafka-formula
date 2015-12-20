@@ -15,6 +15,11 @@ kafka:
     - groups:
       - kafka
 
+java-pkg:
+  pkg.installed:
+    - name: {{ kafka.java.pkg }}
+    - refresh: true
+
 kafka-tarball:
   archive.extracted:
     - name: /usr/local/lib
@@ -25,6 +30,8 @@ kafka-tarball:
     - user: root
     - group: root
     - if_missing: /usr/local/lib/kafka_{{ kafka.version.scala }}-{{ kafka.version.kafka }}
+    - require:
+      - pkg: java-pkg
 
 kafka-alternatives:
   alternatives.install:

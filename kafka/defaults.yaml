@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
 kafka:
+  java:
+    pkg: openjdk-8-jre-headless
   pkg: kafka
   config: '/usr/local/lib/kafka/config/server.properties'
   service:
