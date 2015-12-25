@@ -29,15 +29,15 @@ kafka-tarball:
     - tar_options: z
     - user: root
     - group: root
-    - if_missing: /usr/local/lib/kafka_{{ kafka.version.scala }}-{{ kafka.version.kafka }}
+    - if_missing: {{ kafka.real_base_dir }}
     - require:
       - pkg: java-pkg
 
 kafka-alternatives:
   alternatives.install:
     - name: kafka
-    - link: /usr/local/lib/kafka
-    - path: /usr/local/lib/kafka_{{ kafka.version.scala }}-{{ kafka.version.kafka }}
+    - link: {{ kafka.base_dir }}
+    - path: {{ kafka.real_base_dir }}
     - priority: 30
     - require:
       - archive: kafka-tarball

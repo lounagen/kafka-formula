@@ -1,19 +1,29 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
+
+# common mutualized values
+{% set version_kafka = "0.9.0.0" %}
+{% set version_scala = "2.11" %}
+{% set tgz_md5 = "084fb80cdc8c72dc75bc3519a5d2cc5c" %}
+{% set parent_base_dir = "/usr/local/lib" %}
+{% set base_dir = "/".join([ parent_base_dir, "kafka"]) %}
+
 kafka:
   java:
     pkg: openjdk-8-jre-headless
   pkg: kafka
-  config: '/usr/local/lib/kafka/config/server.properties'
+  config: '{{ base_dir }}/config/server.properties'
   service:
     name: kafka
+  base_dir: {{ base_dir }}
+  real_base_dir: {{ base_dir }}_{{ version_scala }}-{{ version_kafka }}
   version:
-    kafka: 0.9.0.0
-    scala: 2.11
+    kafka: {{ version_kafka }}
+    scala: {{ version_scala }}
   tarball:
     tgz:
-      source: http://apache.mirrors.ovh.net/ftp.apache.org/dist/kafka/0.9.0.0/kafka_2.11-0.9.0.0.tgz
-      source_hash: md5=084fb80cdc8c72dc75bc3519a5d2cc5c
+      source: http://apache.mirrors.ovh.net/ftp.apache.org/dist/kafka/{{ version_kafka }}/kafka_{{ version_scala }}-{{ version_kafka }}.tgz
+      source_hash: md5={{ tgz_md5 }}
   conf:
     broker:
       id: 0
