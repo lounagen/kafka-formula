@@ -15,7 +15,7 @@ kafka:
     - groups:
       - kafka
 
-java-pkg:
+kafka-java-pkg:
   pkg.installed:
     - name: {{ kafka.java.pkg }}
     - refresh: true
@@ -31,7 +31,7 @@ kafka-tarball:
     - group: root
     - if_missing: {{ kafka.real_base_dir }}
     - require:
-      - pkg: java-pkg
+      - pkg: kafka-java-pkg
 
 kafka-alternatives:
   alternatives.install:
