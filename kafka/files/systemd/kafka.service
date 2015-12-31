@@ -1,9 +1,13 @@
+{%- from "kafka/map.jinja" import kafka with context %}
 [Unit]
 Description=kafka broker
 After=network.target
 
 [Service]
 Type=simple
+# If you need to override Environment variable after install, the recommended way is to put the next line
+# in a /etc/systemd/system/kafka.service.d/whatever_filename.conf, inside a [Service] section
+Environment="KAFKA_HEAP_OPTS={{ kafka.java.heap_opts }}"
 ExecStart=/usr/local/lib/kafka/bin/kafka-server-start.sh /usr/local/lib/kafka/config/server.properties
 ExecStop=/usr/local/lib/kafka/bin/kafka-server-stop.sh
 

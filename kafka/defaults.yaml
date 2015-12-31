@@ -11,6 +11,7 @@
 kafka:
   java:
     pkg: openjdk-8-jre-headless
+    heap_opts: '-Xmx1G -Xms1G'
   pkg: kafka
   config: '{{ base_dir }}/config/server.properties'
   service:
