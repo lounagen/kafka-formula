@@ -1,3 +1,18 @@
 kafka:
   lookup:
-    master: kafka-master
+    foo: kafka-bar
+  java:
+    heap_opts: '-Xmx1g -Xms128m'
+  conf:
+    broker:
+      id: 42
+    host:
+      name: {{ grains['ip4_interfaces']['eth0'][0] }}
+      name: 10.2.3.4
+    zookeeper:
+{% set zoo_list = [] %}
+{% for n in range(1,6) %}
+{% do zoo_list.append('zoo-' ~ n ~ '.mydomain.foo:2181') %}
+{% endfor %}
+      connect: '{{ ",".join(zoo_list) }}'
+      #connect: 'zoo-X.mydomain.foo:2181,zoo-Y.mydomain.foo:2181,zoo-Z.mydomain.foo:2181'
